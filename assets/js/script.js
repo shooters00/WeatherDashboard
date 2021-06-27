@@ -27,15 +27,17 @@ function init() {
 //Turn saved info into city buttons
 function makeButtonsFromSaved() {
     for (var i = 0; i < savedInfo.length; i++) {
-        var lix = document.createElement("button");
-        lix.textContent = savedInfo[i].city;
-        cityListEl.appendChild(lix);
+        var btnx = document.createElement("button");
+        btnx.textContent = savedInfo[i].city;
+        btnx.classList.add("saveBtn", "col-12");
+        cityListEl.appendChild(btnx);
     }
 }
 
 //Take in a city name and get the lat/lon
 
-function getGeo() {
+function getGeo(event) {
+    event.preventDefault();
     var city = searchText.value.toUpperCase();
 
     var geoSpec = weatherBase + "/geo/1.0/direct?q=" + city + "&limit=1&appid=" + apiKey;
@@ -57,9 +59,10 @@ function getGeo() {
         console.log(newCityInfo)
         savedInfo.push(newCityInfo);
         localStorage.setItem("savedInfo", JSON.stringify(savedInfo));
-        var li = document.createElement("button");
-        li.textContent = city;
-        cityListEl.appendChild(li);
+        var btn = document.createElement("button");
+        btn.textContent = city;
+        btn.classList.add("saveBtn", "col-12");
+        cityListEl.appendChild(btn);
         searchText.value = "";
       });
 }

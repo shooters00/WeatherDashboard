@@ -4,10 +4,7 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta http-equiv="X-UA-Compatible" content="ie=edge" />
-    <link
-      rel="stylesheet"
-      href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
-    />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css" integrity="sha384-B0vP5xmATw1+K9KRQjQERJvTumQW0nPEzvF6L/Z6nronJ3oUOFUFpCjEUQouq2+l" crossorigin="anonymous">
     <link rel="stylesheet" href="assets/css/style.css" />
     <title>Weather Dashboard</title>
   </head>
@@ -17,25 +14,88 @@
       <h1 class="name">Weather Dashboard</h1>
     </div>
 
-    <div class = "container searchContainer">
-      <h2>Search for a City:</h2>
-      <input type = "text" id = "searchText">
-      <button id="searchBtn" class="btn saveBtn col-1">Click me <i class="fas fa-save"></button>
-      <hr>
-      <div class="cityList" id="cityList"></div>
-    </div>
+    <div class = "container-fluid">
+      <div class = "row">
 
-    <div class="container">
-
-      <div row>
-
-        
-      </div>
-
-      
-
+        <div class = "col-lg-3 bg-light">
+          <h2 class="">Search for a City:</h2>
+          <form>
+            <input type = "text" id = "searchText" class="col-12">
+            <button type = "submit" id="searchBtn" class="btn saveBtn col-12">Click me</button>
+          </form>
+          <hr>
     
+          <div class="cityList" id="cityList" class="col-12"></div>
+        </div>
 
+        <div class = "col-lg-9">
+
+          <div class = "row">
+            <div class="currentWeather col-lg-12 m-2">
+              <h4>City Name (X/XX/XXXX) + Icon</h4>
+              <p class="" id="cuurentTemp">Temp</li>
+              <p class="" id="currentSymbol">Icon Here</li>
+              <p class="" id="currentTemp">Temp: XXX</li>
+              <p class="" id="currentWind">Wind: XX.XX MPH</li>
+              <p class="" id="currentHumidity">Humidity: XX%</li>
+              <p class="" id="currentUV">UV Index: X.XX</li>
+            </div>
+          </div>
+          
+          <div class = "row">
+            <h5 class = "col-lg-9">5-Day Forecast:</h5>
+          </div>
+          
+          <div class = "row">
+            <div class="forecastWeather col-lg-9">
+
+              <div class="01 card m-2 p-2" style="width: 11rem">
+                <p class="" id="01date">Date</li>
+                <p class="" id="01symbol">Icon Here</li>
+                <p class="" id="01temp">Temp: XXX</li>
+                <p class="" id="01wind">Wind: XX.XX MPH</li>
+                <p class="" id="01humidity">Humidity: XX%</li>
+              </div>
+
+              <div class="02 card m-2 p-2" style="width: 11rem">
+                <p class="" id="02date">Date</li>
+                <p class="" id="02symbol">Icon Here</li>
+                <p class="" id="02temp">Temp: XXX</li>
+                <p class="" id="02wind">Wind: XX.XX MPH</li>
+                <p class="" id="02humidity">Humidity: XX%</li>
+              </div>
+
+              <div class="03 card m-2 p-2" style="width: 11rem">
+                <p class="" id="03date">Date</li>
+                <p class="" id="03symbol">Icon Here</li>
+                <p class="" id="03temp">Temp: XXX</li>
+                <p class="" id="03wind">Wind: XX.XX MPH</li>
+                <p class="" id="03humidity">Humidity: XX%</li>
+              </div>
+
+              <div class="04 card m-2 p-2" style="width: 11rem">
+                <p class="" id="04date">Date</li>
+                <p class="" id="04symbol">Icon Here</li>
+                <p class="" id="04temp">Temp: XXX</li>
+                <p class="" id="04wind">Wind: XX.XX MPH</li>
+                <p class="" id="04humidity">Humidity: XX%</li>
+              </div>
+
+              <div class="05 card m-2 p-2" style="width: 11rem">
+                <p class="" id="05date">Date</li>
+                <p class="" id="05symbol">Icon Here</li>
+                <p class="" id="05temp">Temp: XXX</li>
+                <p class="" id="05wind">Wind: XX.XX MPH</li>
+                <p class="" id="05humidity">Humidity: XX%</li>
+              </div>
+
+
+            </div>
+
+          </div>
+
+        </div>
+      </div>
     </div>
 
     <script src="assets/js/script.js"></script>

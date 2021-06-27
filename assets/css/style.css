@@ -11,15 +11,26 @@ body {
   width:100%;
 }
 
+h2 {
+}
+
 .saveBtn {
-  border-left: 1px solid black;
-  border-top-right-radius: 15px;
-  border-bottom-right-radius: 15px;
   background-color: #06aed5;
   color: white;
+  border-radius:5px;
+  margin-top: 5px;
 }
 
 .saveBtn i:hover {
   font-size: 20px;
   transition: all 0.3s ease-in-out;
+}
+
+.currentWeather {
+  border: 1px solid black;
+}
+
+.card {
+  color: white;
+  background-color: rgb(8, 8, 92);
 }
