@@ -1,0 +1,25 @@
+body {
+  font-size: 16px;
+  line-height: 1;
+}
+
+.navbar-brand {
+  text-align: center;
+  height: 75px;
+  background-image: linear-gradient(to right, rgb(88, 88, 252) , rgb(6, 6, 87));
+  color: white;
+  width:100%;
+}
+
+.saveBtn {
+  border-left: 1px solid black;
+  border-top-right-radius: 15px;
+  border-bottom-right-radius: 15px;
+  background-color: #06aed5;
+  color: white;
+}
+
+.saveBtn i:hover {
+  font-size: 20px;
+  transition: all 0.3s ease-in-out;
+}
