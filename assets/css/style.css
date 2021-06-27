@@ -30,7 +30,28 @@ h2 {
   border: 1px solid black;
 }
 
+.weatherInfo {
+  margin-right: -0px;
+}
+
+.weather2 {
+  margin-left: -20px;
+  margin-top: 10px;
+}
+
+.weather3 {
+  margin-left: -30px;
+}
+
 .card {
   color: white;
   background-color: rgb(8, 8, 92);
+}
+
+.show {
+  display: inline;
+}
+
+.hide {
+  display: block;
 }

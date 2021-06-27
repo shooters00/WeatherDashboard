@@ -15,7 +15,7 @@
     </div>
 
     <div class = "container-fluid">
-      <div class = "row">
+      <div class = "row weatherInfo">
 
         <div class = "col-lg-3 bg-light">
           <h2 class="">Search for a City:</h2>
@@ -28,9 +28,9 @@
           <div class="cityList" id="cityList" class="col-12"></div>
         </div>
 
-        <div class = "col-lg-9">
+        <div class = "col-lg-9 show">
 
-          <div class = "row">
+          <div class = "row weather1">
             <div class="currentWeather col-lg-12 m-2">
               <h4>City Name (X/XX/XXXX) + Icon</h4>
               <p class="" id="cuurentTemp">Temp</li>
@@ -42,14 +42,14 @@
             </div>
           </div>
           
-          <div class = "row">
-            <h5 class = "col-lg-9">5-Day Forecast:</h5>
+
+          <div class = "row weather2">
+            <h5 class = "col-lg-12">5-Day Forecast:</h5>
           </div>
           
-          <div class = "row">
-            <div class="forecastWeather col-lg-9">
+          <div class = "row weather3 forecastWeather col-lg-12">
 
-              <div class="01 card m-2 p-2" style="width: 11rem">
+              <div class="01 card m-2 p-2">
                 <p class="" id="01date">Date</li>
                 <p class="" id="01symbol">Icon Here</li>
                 <p class="" id="01temp">Temp: XXX</li>
@@ -57,7 +57,7 @@
                 <p class="" id="01humidity">Humidity: XX%</li>
               </div>
 
-              <div class="02 card m-2 p-2" style="width: 11rem">
+              <div class="02 card m-2 p-2">
                 <p class="" id="02date">Date</li>
                 <p class="" id="02symbol">Icon Here</li>
                 <p class="" id="02temp">Temp: XXX</li>
@@ -65,7 +65,7 @@
                 <p class="" id="02humidity">Humidity: XX%</li>
               </div>
 
-              <div class="03 card m-2 p-2" style="width: 11rem">
+              <div class="03 card m-2 p-2">
                 <p class="" id="03date">Date</li>
                 <p class="" id="03symbol">Icon Here</li>
                 <p class="" id="03temp">Temp: XXX</li>
@@ -73,7 +73,7 @@
                 <p class="" id="03humidity">Humidity: XX%</li>
               </div>
 
-              <div class="04 card m-2 p-2" style="width: 11rem">
+              <div class="04 card m-2 p-2">
                 <p class="" id="04date">Date</li>
                 <p class="" id="04symbol">Icon Here</li>
                 <p class="" id="04temp">Temp: XXX</li>
@@ -81,7 +81,7 @@
                 <p class="" id="04humidity">Humidity: XX%</li>
               </div>
 
-              <div class="05 card m-2 p-2" style="width: 11rem">
+              <div class="05 card m-2 p-2">
                 <p class="" id="05date">Date</li>
                 <p class="" id="05symbol">Icon Here</li>
                 <p class="" id="05temp">Temp: XXX</li>
@@ -90,14 +90,13 @@
               </div>
 
 
-            </div>
-
           </div>
 
         </div>
       </div>
     </div>
 
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment.min.js"></script>
     <script src="assets/js/script.js"></script>
   </body>
 </html>
