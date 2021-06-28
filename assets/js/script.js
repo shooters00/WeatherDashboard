@@ -1,6 +1,12 @@
 var searchTextEl = document.getElementById("searchText");
 var searchBtnEl = document.getElementById("searchBtn");
 var cityListEl = document.getElementById("cityList");
+var cityNameEl = document.getElementById("cityName");
+var currentTempEl = document.getElementById("currentTemp");
+var currentSymbolEl = document.getElementById("currentSymbol");
+var currentWindEl = document.getElementById("currentWind");
+var currentHumidityEl = document.getElementById("currentHumidity");
+var currentUVEl = document.getElementById("currentUV");
 var apiKey = "46861786b19faeb5c53a77361744c4d6";
 var weatherBase = "https://api.openweathermap.org";
 var savedInfo = [];
@@ -37,7 +43,7 @@ function makeButtonsFromSaved() {
     for (var i = 0; i < savedInfo.length; i++) {
         var btnx = document.createElement("button");
         btnx.textContent = savedInfo[i].city;
-        btnx.classList.add("saveBtn", "col-12");
+        btnx.classList.add("saveBtn", "city", "col-12");
         cityListEl.appendChild(btnx);
     }
 }
@@ -65,12 +71,17 @@ function getGeo(event) {
                 lon
             };
             console.log(newCityInfo)
-            savedInfo.push(newCityInfo);
-            localStorage.setItem("savedInfo", JSON.stringify(savedInfo));
-            var btn = document.createElement("button");
-            btn.textContent = city;
-            btn.classList.add("saveBtn", "col-12");
-            cityListEl.appendChild(btn);
+
+            var found = savedInfo.findIndex(x => x.city === newCityInfo.city);
+            if (found === -1) {
+                savedInfo.push(newCityInfo);
+                localStorage.setItem("savedInfo", JSON.stringify(savedInfo));
+                var btn = document.createElement("button");
+                btn.textContent = city;
+                btn.classList.add("saveBtn", "city", "col-12");
+                cityListEl.appendChild(btn);
+            }
+
             searchText.value = "";
             getCurrentWeather(newCityInfo);
         });
@@ -85,15 +96,45 @@ function getCurrentWeather(cityInfo) {
         })
         .then(function (data) {
             console.log(data);
-            cityInfo.city;
             var hum = data.current.humidity;
             var uvi = data.current.uvi;
             var wind = data.current.wind_speed;
-            var tmp = data.current.temp;
+            var temp = data.current.temp;
             var daysIcon = data.current.weather[0].icon;
             var iconURL = "http://openweathermap.org/img/wn/"+daysIcon+"@2x.png";
-            console.log (cityInfo.city + " " + day + " " + hum + " " + uvi + " " + wind + " " + tmp + " " + iconURL);
+            console.log (cityInfo.city + " " + day + " " + hum + " " + uvi + " " + wind + " " + temp + " " + iconURL);
 
+            //Add current weather to page
+                cityNameEl.textContent = cityInfo.city + " (" + nextDays[0] + ") ";
+                currentSymbolEl.src = iconURL;
+                currentTempEl.textContent = temp;
+                currentWindEl.textContent = wind;
+                currentHumidityEl.textContent = hum;
+                currentUVEl.textContent = uvi;
+
+            for (var i=1; i < 6; i++) {
+                var dateiEl = document.getElementById("0"+i+"date");
+                var symboliEl = document.getElementById("0"+i+"symbol");
+                var tempiEl = document.getElementById("0"+i+"temp");
+                var windiEl = document.getElementById("0"+i+"wind");
+                var humidityiEl = document.getElementById("0"+i+"humidity");
+
+                dateiEl.textContent = nextDays[i];
+
+                daysIcon = data.daily[i].weather[0].icon;
+                iconURL = "http://openweathermap.org/img/wn/"+daysIcon+"@2x.png";
+                console.log("iconURL: " + iconURL);
+                //currentSymbolEl.setAttribute("src", iconURL);
+                currentSymbolEl.src = iconURL;
+
+                tempiEl.textContent = data.daily[i].temp.day;
+
+                windiEl.textContent = data.daily[i].wind_speed;
+
+                humidityiEl.textContent = data.daily[i].humidity;
+
+            }
+            
         })
 }
 
@@ -157,6 +198,7 @@ function postWeather() {
 
 }
 
+getDays();
 init();
 makeButtonsFromSaved();
 searchBtnEl.addEventListener("click", getGeo);
