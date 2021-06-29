@@ -7,6 +7,7 @@ var currentSymbolEl = document.getElementById("currentSymbol");
 var currentWindEl = document.getElementById("currentWind");
 var currentHumidityEl = document.getElementById("currentHumidity");
 var currentUVEl = document.getElementById("currentUV");
+var showDataEl = document.querySelector(".showData");
 var apiKey = "46861786b19faeb5c53a77361744c4d6";
 var weatherBase = "https://api.openweathermap.org";
 var savedInfo = [];
@@ -25,6 +26,7 @@ function getDays() {
 
 //Get content from local storage and display on screen
 function init() {
+
     if (localStorage.getItem("savedInfo") === null) {
         return;
     } else {
@@ -101,7 +103,7 @@ function getCurrentWeather(cityInfo) {
             var wind = data.current.wind_speed;
             var temp = data.current.temp;
             var daysIcon = data.current.weather[0].icon;
-            var iconURL = "http://openweathermap.org/img/wn/"+daysIcon+"@2x.png";
+            var iconURL = "http://openweathermap.org/img/wn/"+daysIcon+".png";
             console.log (cityInfo.city + " " + day + " " + hum + " " + uvi + " " + wind + " " + temp + " " + iconURL);
 
             //Add current weather to page
@@ -124,8 +126,8 @@ function getCurrentWeather(cityInfo) {
                 daysIcon = data.daily[i].weather[0].icon;
                 iconURL = "http://openweathermap.org/img/wn/"+daysIcon+"@2x.png";
                 console.log("iconURL: " + iconURL);
-                //currentSymbolEl.setAttribute("src", iconURL);
-                currentSymbolEl.src = iconURL;
+                //symbolEl.setAttribute("src", iconURL);
+                symboliEl.src = iconURL;
 
                 tempiEl.textContent = data.daily[i].temp.day;
 
@@ -134,74 +136,18 @@ function getCurrentWeather(cityInfo) {
                 humidityiEl.textContent = data.daily[i].humidity;
 
             }
+
             
         })
+    displayContent();
 }
 
-
-//Save city on the page and put in local storage once Searched
-function saveCity() {
-
-    //Code from last HW to check for duplicate
-    //var found = savedInfo.findIndex(x => x.hour === timeLine);
-    //if (found !== -1) {
-    //    savedInfo.splice(found, 1);
-    //}
-
-
-    var mySavedInfo = {
-
-    }
- 
-    savedInfo.push(mySavedInfo);
-
-    localStorage.setItem("savedInfo", JSON.stringify(savedInfo));
+function displayContent() {
+    showDataEl.setAttribute("style", "display: block");
 }
 
-//Not sure this is needed.  Get position of user.
-//function getPosition () {
-
-//}
-
-/*
-//Take in city and get weather
-function getCurrentWeather() {
-    fetch(weatherCurrent, {
-        //units="imperial"
-    })
-    .then(function (response) {
-        return response.json();
-    })
-    .then(function (data) {
-        console.log(data);
-      });
-}
-*/
-
-/*
-//Take in city and get forecast
-function getForecastWeather() {
-    fetch(weatherForecast, {
-        //units = "imperial"
-    })
-    .then(function (response) {
-        return response.json();
-    })
-    .then(function (data) {
-        console.log(data);
-      });
-}
-*/
-
-//Present weather on page
-function postWeather() {
-
-}
 
 getDays();
 init();
 makeButtonsFromSaved();
 searchBtnEl.addEventListener("click", getGeo);
-
-//Wait for the save button to be clicked
-//$(".saveBtn").on("click", saveMyStuff);

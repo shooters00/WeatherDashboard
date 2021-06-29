@@ -9,6 +9,7 @@ body {
   background-image: linear-gradient(to right, rgb(88, 88, 252) , rgb(6, 6, 87));
   color: white;
   width:100%;
+  margin-right: 0;
 }
 
 h2 {
@@ -30,11 +31,13 @@ h2 {
   background-color:rgb(95, 84, 124)
 }
 
-.currentWeather {
-  border: 1px solid black;
+.weather1 {
+  margin-left: -15px;
+  margin-right: 2px;
 }
 
-.weatherInfo {
+.currentWeather {
+  border: 1px solid black;
   margin-right: -0px;
 }
 
@@ -44,19 +47,20 @@ h2 {
 }
 
 .weather3 {
-  margin-left: -30px;
+  margin-left: -15px;
   width:auto;
 }
 
 .card {
   color: white;
   background-color: rgb(8, 8, 92);
+  flex: 1;
 }
 
 .show {
-  display: inline;
+  display: block;
 }
 
 .hide {
-  display: block;
+  display: none;
 }
