@@ -13,9 +13,7 @@ var weatherBase = "https://api.openweathermap.org";
 var savedInfo = [];
 var day;
 var nextDays = [];
-
-//var weatherCurrent = weatherBase + "/data/2.5/weather?q=" + city + "&units=imperial&appid=" + apiKey;
-//var weatherForecast = weatherBase + "/data/2.5/forecast?q=" + city + "&units=imperial&appid=" + apiKey;
+var city;
 
 //Get the date from moment.js
 function getDays() {
@@ -24,18 +22,13 @@ function getDays() {
     }
 }
 
-//Get content from local storage and display on screen
+//Get content from local storage for use
 function init() {
 
     if (localStorage.getItem("savedInfo") === null) {
         return;
     } else {
         savedInfo = JSON.parse(localStorage.getItem("savedInfo"));
-        //for (var i=0; i < savedInfo.length; i++) {
-         //   var returnTask = savedInfo[i].task;
-         //   var returnTime = "#"+savedInfo[i].hour;
-         //   $(returnTime).children(".description").val(returnTask);
-        //}
         return savedInfo;
     }
 }
@@ -50,12 +43,22 @@ function makeButtonsFromSaved() {
     }
 }
 
-//Take in a city name and get the lat/lon
-
-function getGeo(event) {
+//Capture the city name from search button
+function getCity(event) {
     event.preventDefault();
-    var city = searchText.value.toUpperCase();
+    city = searchText.value.toUpperCase();
+    getGeo();
+}
 
+//Use the city name from previously generated buttons
+function previousSearch(event) {
+    event.preventDefault();
+    city = event.target.textContent;
+    getGeo();
+}
+
+//Get the lat/lon from the entered city.  Ensure cities can't be added twice.  Save city/lat/lon to local storage.  Display on page.  Delete search text.
+function getGeo() {
     var geoSpec = weatherBase + "/geo/1.0/direct?q=" + city + "&limit=1&appid=" + apiKey;
  
     fetch(geoSpec)
@@ -63,7 +66,6 @@ function getGeo(event) {
             return response.json();
         })
         .then(function (data) {
-            console.log(data);
             var lat = data[0].lat;
             var lon = data[0].lon;
             
@@ -72,7 +74,6 @@ function getGeo(event) {
                 lat,
                 lon
             };
-            console.log(newCityInfo)
 
             var found = savedInfo.findIndex(x => x.city === newCityInfo.city);
             if (found === -1) {
@@ -89,6 +90,7 @@ function getGeo(event) {
         });
 }
 
+//Use lat and lon to get the current weather and forecast using the onecall api.  Display content once created.
 function getCurrentWeather(cityInfo) {
     var currentSpec = weatherBase + "/data/2.5/onecall?lat=" + cityInfo.lat + "&lon=" + cityInfo.lon + "&exclude=minutely,hourly,alerts&units=imperial&appid=" + apiKey;
 
@@ -104,7 +106,6 @@ function getCurrentWeather(cityInfo) {
             var temp = data.current.temp;
             var daysIcon = data.current.weather[0].icon;
             var iconURL = "http://openweathermap.org/img/wn/"+daysIcon+".png";
-            console.log (cityInfo.city + " " + day + " " + hum + " " + uvi + " " + wind + " " + temp + " " + iconURL);
 
             //Add current weather to page
                 cityNameEl.textContent = cityInfo.city + " (" + nextDays[0] + ") ";
@@ -113,6 +114,18 @@ function getCurrentWeather(cityInfo) {
                 currentWindEl.textContent = wind;
                 currentHumidityEl.textContent = hum;
                 currentUVEl.textContent = uvi;
+                
+                if (uvi < 3) {
+                    currentUVEl.classList.add("low");
+                } else if (uvi >= 3 && uvi < 6) {
+                    currentUVEl.classList.add("low-medium");
+                } else if (uvi >= 6 && uvi < 8) {
+                    currentUVEl.classList.add("medium");
+                } else if (uvi >= 8 && uvi < 11) {
+                    currentUVEl.classList.add("medium-high");
+                } else {
+                    currentUVEl.classList.add("high");
+                }
 
             for (var i=1; i < 6; i++) {
                 var dateiEl = document.getElementById("0"+i+"date");
@@ -125,8 +138,6 @@ function getCurrentWeather(cityInfo) {
 
                 daysIcon = data.daily[i].weather[0].icon;
                 iconURL = "http://openweathermap.org/img/wn/"+daysIcon+"@2x.png";
-                console.log("iconURL: " + iconURL);
-                //symbolEl.setAttribute("src", iconURL);
                 symboliEl.src = iconURL;
 
                 tempiEl.textContent = data.daily[i].temp.day;
@@ -144,10 +155,12 @@ function getCurrentWeather(cityInfo) {
 
 function displayContent() {
     showDataEl.setAttribute("style", "display: block");
+
 }
 
 
 getDays();
 init();
 makeButtonsFromSaved();
-searchBtnEl.addEventListener("click", getGeo);
+searchBtnEl.addEventListener("click", getCity);
+cityListEl.addEventListener("click", previousSearch);

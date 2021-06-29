@@ -12,9 +12,6 @@ body {
   margin-right: 0;
 }
 
-h2 {
-}
-
 .saveBtn {
   background-color: #06aed5;
   color: white;
@@ -39,6 +36,32 @@ h2 {
 .currentWeather {
   border: 1px solid black;
   margin-right: -0px;
+}
+
+#currentUV {
+  color: white;
+  border-radius: 5px;
+}
+
+.low {
+  background-color: rgb(8, 134, 14);
+  
+}
+
+.low-medium {
+  background-color: rgb(209, 212, 10);
+}
+
+.medium {
+  background-color: rgb(212, 91, 10);
+}
+
+.medium-high {
+  background-color: rgb(212, 10, 10);
+}
+
+.high {
+  background-color: rgb(67, 42, 151);
 }
 
 .weather2 {
