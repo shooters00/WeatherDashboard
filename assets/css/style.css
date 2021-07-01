@@ -12,6 +12,11 @@ body {
   margin-right: 0;
 }
 
+#weatherTitle {
+  font-family: 'Suez One', serif;
+  margin-top: 2px;
+}
+
 .saveBtn {
   background-color: #06aed5;
   color: white;
@@ -24,8 +29,15 @@ body {
   transition: all 0.3s ease-in-out;
 }
 
+.errorMessage {
+  margin: 10px;
+  text-align: center;
+}
+
 .city {
-  background-color:rgb(95, 84, 124)
+  padding: 4px 0px;
+  background-color:rgb(95, 84, 124);
+  margin: 5px 0px;
 }
 
 .weather1 {
@@ -41,6 +53,7 @@ body {
 #currentUV {
   color: white;
   border-radius: 5px;
+  padding: 0px 2px;
 }
 
 .low {

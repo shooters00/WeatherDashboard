@@ -8,6 +8,7 @@ var currentWindEl = document.getElementById("currentWind");
 var currentHumidityEl = document.getElementById("currentHumidity");
 var currentUVEl = document.getElementById("currentUV");
 var showDataEl = document.querySelector(".showData");
+var errorMessageEl = document.querySelector(".errorMessage");
 var apiKey = "46861786b19faeb5c53a77361744c4d6";
 var weatherBase = "https://api.openweathermap.org";
 var savedInfo = [];
@@ -59,13 +60,22 @@ function previousSearch(event) {
 
 //Get the lat/lon from the entered city.  Ensure cities can't be added twice.  Save city/lat/lon to local storage.  Display on page.  Delete search text.
 function getGeo() {
-    var geoSpec = weatherBase + "/geo/1.0/direct?q=" + city + "&limit=1&appid=" + apiKey;
+    //var geoSpec = weatherBase + "/geo/1.0/direct?q=" + city + "&limit=1&appid=" + apiKey;
+    var geoSpec = `${weatherBase}//geo/1.0/direct?q=${city}&limit=1&appid=${apiKey}`;
  
     fetch(geoSpec)
         .then(function (response) {
             return response.json();
         })
         .then(function (data) {
+            if (data.length === 0) {
+                searchText.value = "";
+                //errorMessageEl.classList.add("show");
+                errorMessageEl.setAttribute("style", "display: block");
+                return;
+            }
+            
+            errorMessageEl.setAttribute("style", "display: none");
             var lat = data[0].lat;
             var lon = data[0].lon;
             
@@ -92,14 +102,14 @@ function getGeo() {
 
 //Use lat and lon to get the current weather and forecast using the onecall api.  Display content once created.
 function getCurrentWeather(cityInfo) {
-    var currentSpec = weatherBase + "/data/2.5/onecall?lat=" + cityInfo.lat + "&lon=" + cityInfo.lon + "&exclude=minutely,hourly,alerts&units=imperial&appid=" + apiKey;
+    //var currentSpec = weatherBase + "/data/2.5/onecall?lat=" + cityInfo.lat + "&lon=" + cityInfo.lon + "&exclude=minutely,hourly,alerts&units=imperial&appid=" + apiKey;
+    var currentSpec = `${weatherBase}/data/2.5/onecall?lat=${cityInfo.lat}&lon=${cityInfo.lon}&exclude=minutely,hourly,alerts&units=imperial&appid=${apiKey}`;
 
     fetch(currentSpec)
         .then(function (response) {
             return response.json();
         })
         .then(function (data) {
-            console.log(data);
             var hum = data.current.humidity;
             var uvi = data.current.uvi;
             var wind = data.current.wind_speed;
