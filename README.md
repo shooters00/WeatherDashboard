@@ -8,4 +8,4 @@
 * The GitHub Repo is located here: https://github.com/shooters00/WeatherDashboard 
 
 ### Video screencaptures of project:
-https://github.com/shooters00/WeatherDashboard/blob/main/assets/archive/WeatherDashboard.mp4
+https://user-images.githubusercontent.com/80861572/124048372-329f3e80-d9e4-11eb-9e70-8d52808e6d04.mp4 
