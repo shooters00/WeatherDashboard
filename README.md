@@ -7,4 +7,5 @@
 * Go to the following web page: https://shooters00.github.io/WeatherDashboard/ 
 * The GitHub Repo is located here: https://github.com/shooters00/WeatherDashboard 
 
-### Screenshots of project:
+### Video screencaptures of project:
+https://github.com/shooters00/WeatherDashboard/blob/main/assets/archive/WeatherDashboard.mp4
