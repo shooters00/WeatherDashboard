@@ -3,7 +3,7 @@
 ## This is a JHU Bootcamp assignment.  
 ## This assignment creates a Weather Dashboard with current and future conditions for a city and saves the city search history.
 
-##Technologies
+## Technologies
 HTML/CSS/JavaScript
 FontAwesome/Google Fonts
 
